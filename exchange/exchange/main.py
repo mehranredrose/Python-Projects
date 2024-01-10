@@ -1,6 +1,6 @@
 import requests
 import json
-from config import url, rules, preferred
+from config import url, rules
 from mail import send_api_mail
 
 
@@ -28,9 +28,9 @@ def send_mail(timestamp, rates):
     get timestamp and rates if there is any preferred rates send them to the entered emails
     """
     subject = f'{timestamp} rates'
-    if preferred is not None:
+    if rules['email']['preferred'] is not None:
         tmp = {}
-        for exc in prefered:
+        for exc in rules['email']['preferred']:
             tmp[exc] = rates[exc]
     rates = tmp
     text = json.dumps(rates)
@@ -38,9 +38,28 @@ def send_mail(timestamp, rates):
     send_api_mail(subject, text)
 
 
+def check_notify_rules(rates):
+    preferred = rules['notification']['preferred']
+    msg = ''
+    for exc in preferred:
+        if rates[exc] <= preferred[exc]['min']:
+            msg += f'{exc} reaced min : {rates[exc]}'
+        if rates[exc] >= preferred[exc]['max']:
+            msg += f'{exc} reaced max : {rates[exc]}'
+
+    return msg
+
+
+def send_notification():
+    pass
+
+
 if __name__ == "__main__":
     response = get_rates()
     if rules['archive']:
         archive(response['timestamp'], response['rates'])
-    if rules['send_mail']:
+    if rules['email']['enable']:
         send_mail(response['timestamp'], response['rates'])
+    if rules['notification']['enable']:
+        check_notify_rules(response['rates'])
+        send_notification()

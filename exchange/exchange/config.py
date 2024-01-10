@@ -6,9 +6,15 @@ url = BASE_PATH+API_KEY
 
 rules = {
     'archive': True,
-    'send_mail': True,
-    # 'preferred': None
-    'preferred': ['IRR', 'USD', 'BTC']
+    'email': {
+        'receiver': 'mehranredrose@gmail.com',
+        'enable': True,
+        # 'preferred': None
+        'preferred': ['IRR', 'USD', 'BTC']
+    },
+    'notification': {
+        'enable': True,
+        'receiver': '09123456789',
+        'preferred': {'IRR': {min: '45000', max: ''}, 'USD': {min: ':1.090000', max: ':1.095000'}}
+    }
 }
-
-RECEIVER_EMAIL = 'mehranredrose@gmail.com'

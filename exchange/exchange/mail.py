@@ -1,10 +1,10 @@
+from email.mime.text import MIMEText
+from local_config import MAILGUN_APIKEY
 import smtplib
 import requests
 
-from config import RECEIVER_EMAIL
-from local_config import MAILGUN_APIKEY
-
-from email.mime.text import MIMEText
+from config import rules
+RECEIVER_EMAIL = rules['email']['receiver']
 
 
 def send_smtp_email(subject, body):
