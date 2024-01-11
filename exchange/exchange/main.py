@@ -2,6 +2,7 @@ import requests
 import json
 from config import url, rules
 from mail import send_api_mail
+from notification import send_sms
 
 
 def get_rates():
@@ -12,6 +13,7 @@ def get_rates():
     response = requests.get(url)
     if response.status_code == 200:
         return json.loads(response.text)
+
     return None
 
 
@@ -50,8 +52,8 @@ def check_notify_rules(rates):
     return msg
 
 
-def send_notification():
-    pass
+def send_notification(msg):
+    send_sms(msg)
 
 
 if __name__ == "__main__":
@@ -61,5 +63,7 @@ if __name__ == "__main__":
     if rules['email']['enable']:
         send_mail(response['timestamp'], response['rates'])
     if rules['notification']['enable']:
-        check_notify_rules(response['rates'])
-        send_notification()
+        notification_msg = check_notify_rules(response['rates'])
+        if notification_msg:
+            print(notification_msg)
+            send_notification(notification_msg)
