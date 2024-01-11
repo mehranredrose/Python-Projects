@@ -3,6 +3,7 @@ import json
 from config import url, rules
 from mail import send_api_mail
 from notification import send_sms
+from jalali_time import jalali
 
 
 def get_rates():
@@ -29,7 +30,7 @@ def send_mail(timestamp, rates):
     """
     get timestamp and rates if there is any preferred rates send them to the entered emails
     """
-    subject = f'{timestamp} rates'
+    subject = f'{timestamp} - {jalali} - rates'
     if rules['email']['preferred'] is not None:
         tmp = {}
         for exc in rules['email']['preferred']:
@@ -53,6 +54,7 @@ def check_notify_rules(rates):
 
 
 def send_notification(msg):
+    msg = msg + '/n' + jalali
     send_sms(msg)
 
 
