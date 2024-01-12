@@ -4,7 +4,7 @@ setup(
     name='hello',
     version=0.01,
     description='simple hello',
-    url='',
+    url='#',  # repository url
     author='Mehran',
     packages=['meow'],
     license='MIT',
