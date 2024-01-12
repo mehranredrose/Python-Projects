@@ -7,6 +7,7 @@ setup(
     url='#',  # repository url
     author='Mehran',
     packages=['meow'],
+    # install_requires=['requests'],
     license='MIT',
     zip_safe=False
 )
