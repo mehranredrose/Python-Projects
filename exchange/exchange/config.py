@@ -1,13 +1,10 @@
-from local_config import API_KEY, PHONE_NUMBER
-BASE_PATH = 'http://data.fixer.io/api/latest?access_key='
+from local_config import PHONE_NUMBER, EMAIL_ADDRESS
 
-
-url = BASE_PATH+API_KEY
 
 rules = {
     'archive': False,
     'email': {
-        'receiver': 'mehranredrose@gmail.com',
+        'receiver': EMAIL_ADDRESS,
         'enable': False,
         # 'preferred': None
         'preferred': ['IRR', 'USD', 'BTC']
