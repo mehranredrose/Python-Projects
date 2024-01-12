@@ -2,7 +2,7 @@ from email.mime.text import MIMEText
 from local_config import MAILGUN_APIKEY
 import smtplib
 import requests
-
+""" !!! rewrite the parts getting info from config and rules !!! """
 from config import rules
 RECEIVER_EMAIL = rules['email']['receiver']
 
