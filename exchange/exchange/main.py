@@ -1,9 +1,13 @@
+import json
+
 from config import rules
 from local_config import API_KEY
-from mail import send_api_mail
 from notification import send_sms
 from jalali_time import jalali
-from fixer.handler import get_rates
+
+from fixer import get_rates
+from mailgun import send_mail
+
 
 def archive(filename, rates):
     """
@@ -11,21 +15,6 @@ def archive(filename, rates):
     """
     with open(f'archive/{filename}.json', 'w') as f:
         f.write(json.dumps(rates))
-
-
-def send_mail(timestamp, rates):
-    """
-    get timestamp and rates if there is any preferred rates send them to the entered emails
-    """
-    subject = f'{timestamp} - {jalali} - rates'
-    if rules['email']['preferred'] is not None:
-        tmp = {}
-        for exc in rules['email']['preferred']:
-            tmp[exc] = rates[exc]
-    rates = tmp
-    text = json.dumps(rates)
-
-    send_api_mail(subject, text)
 
 
 def check_notify_rules(rates):
