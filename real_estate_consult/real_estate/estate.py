@@ -1,8 +1,7 @@
-from base import BaseClass
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 
-class EstateAbstract(BaseClass):
+class EstateAbstract(ABC):
     def __init__(self, user, area, rooms_count, build_year, region, address, *args, **kwargs):
         self.user = user
         self.area = area

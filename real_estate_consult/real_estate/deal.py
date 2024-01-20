@@ -1,7 +1,7 @@
-from base import BaseClass
+from abc import ABC
 
 
-class Sale(BaseClass):
+class Sale(ABC):
     def __init__(self, price_per_meter, discount, convert, *args, **kwargs):
         self.price_per_meter = price_per_meter
         self.discount = discount
@@ -13,7 +13,7 @@ class Sale(BaseClass):
             f'Price={self.price_per_meter} , Discount= {self.discount} , Convert= {self.convert}')
 
 
-class Rent(BaseClass):
+class Rent(ABC):
     def __init__(self, initial_price, monthly_price, convert, discount, *args, **kwargs):
         self.initial_price = initial_price
         self.monthly_price = monthly_price
