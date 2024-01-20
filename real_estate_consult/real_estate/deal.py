@@ -8,6 +8,10 @@ class Sale(BaseClass):
         self.convert = convert
         super().__init__(*args, **kwargs)
 
+    def show_price(self):
+        print(
+            f'Price={self.price_per_meter} , Discount= {self.discount} , Convert= {self.convert}')
+
 
 class Rent(BaseClass):
     def __init__(self, initial_price, monthly_price, convert, discount, *args, **kwargs):
